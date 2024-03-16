@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 // Function to fill a 2D vector with zeros
 void fillWithZeros(vector<vector<int>>& grid) {
     for (auto& row : grid) {
