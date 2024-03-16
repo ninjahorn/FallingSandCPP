@@ -1,3 +1,5 @@
 C:/Eigene Dateien/CLionProjects/FallingSandSim/cmake-build-debug/CMakeFiles/FallingSandSim.dir
+C:/Eigene Dateien/CLionProjects/FallingSandSim/cmake-build-debug/CMakeFiles/imgui.dir
+C:/Eigene Dateien/CLionProjects/FallingSandSim/cmake-build-debug/CMakeFiles/imgui-sfml.dir
 C:/Eigene Dateien/CLionProjects/FallingSandSim/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Eigene Dateien/CLionProjects/FallingSandSim/cmake-build-debug/CMakeFiles/rebuild_cache.dir
