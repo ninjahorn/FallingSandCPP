@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 // Function to fill a 2D vector with zeros
 void fillWithZeros(vector<vector<int>>& grid) {
     for (auto& row : grid) {
@@ -16,6 +15,7 @@ void fillWithZeros(vector<vector<int>>& grid) {
     }
 }
 
+// Function to draw the grid to the window
 void drawGrid(sf::RenderWindow& window, const vector<vector<int>>& grid, int cellWidth, int cellHeight, sf::Color sandColor) {
 
     // loop through the vector (the grid)
@@ -46,13 +46,15 @@ void drawGrid(sf::RenderWindow& window, const vector<vector<int>>& grid, int cel
     }
 }
 
+
+// Function to animate the next frame
 void animateNextFrame(vector<vector<int>>& grid, vector<vector<int>>& newGrid) {
     for (int i = 0; i < grid.size(); i++) {
         for (int j = 0; j < grid[i].size(); j++) {
-            if (grid[i][j] == 1) { // Aktueller Punkt ist Sand
-                if (i < grid.size() -1) { // Sand ist nicht am Boden
-                    if (grid[i+1][j] == 1) { // Unter dem Sand ist Sand
-                        if (j != 0 && j != grid[i].size() - 1) { // Sand ist nicht an der linken oder rechten Wand
+            if (grid[i][j] == 1) { // if the element is sand
+                if (i < grid.size() -1) { // sand is not at the bottom
+                    if (grid[i+1][j] == 1) { // under the sand is sand
+                        if (j != 0 && j != grid[i].size() - 1) { // sand is not at the left or right wall
                             // generate a random number (0 or 1)
                             int randNum = rand() % 2;
                             if (randNum == 0 && grid[i+1][j-1] == 0) { // if random number is 0 and left bottom is empty
@@ -62,23 +64,23 @@ void animateNextFrame(vector<vector<int>>& grid, vector<vector<int>>& newGrid) {
                             } else {
                                 newGrid[i][j] = 1;
                             }
-                        } else if (j == 0) { // Sand ist an der linken Wand
-                            if (grid[i+1][j+1] == 0) { // Rechts unten ist kein Sand
+                        } else if (j == 0) { // sand is at the left wall
+                            if (grid[i+1][j+1] == 0) { // right bottom is empty
                                 newGrid[i+1][j+1] = 1;
                             } else {
                                 newGrid[i][j] = 1;
                             }
-                        } else if (j == grid[i].size() - 1) { // Sand ist an der rechten Wand
-                            if (grid[i+1][j-1] == 0) { // Links unten ist kein Sand
+                        } else if (j == grid[i].size() - 1) { // sand is at the right wall
+                            if (grid[i+1][j-1] == 0) { // left bottom is empty
                                 newGrid[i+1][j-1] = 1;
                             } else {
                                 newGrid[i][j] = 1;
                             }
                         }
-                    } else { // Unter dem Sand ist kein Sand
+                    } else { // Under the sand is no sand
                         newGrid[i+1][j] = 1;
                     }
-                } else if (i == grid.size() - 1) { // Sand ist am Boden
+                } else if (i == grid.size() - 1) { // Sand is at the bottom
                     newGrid[i][j] = 1;
                 }
             }
@@ -117,19 +119,16 @@ int main()
         return -1;
     }
 
-    ImGui::SetNextWindowSize(ImVec2(100, 350));
+    ImGui::SetNextWindowSize(ImVec2(100, 400));
 
-//    ImGuiIO& io = ImGui::GetIO();
-//    io.FontGlobalScale = 1.2f;
-
-    // Uhr für die Zeit pro Frame
+    // clock for frame timing
     sf::Clock clock;
-    // Zeit pro Frame
+    // Time per frame
     sf::Time timePerFrame = sf::milliseconds(0.3f);
 
-    // Stoppuhr für Sandplatzierung (Damit bei einem Mausklick nicht so schnell Sand platziert wird)
+    // stop watch for sand placement (so that it doesn't place sand too fast)
     sf::Clock sandClock;
-    // Delay für die Sandplatzierung (in Sekunden)
+    // Delay for sand placement
     float sandDelay = 0.02f ;
 
     int particleType = 1;
@@ -172,10 +171,10 @@ int main()
                 int gridY = mousePos.y / cellHeight;
                 // check if the grid coordinates are within the grid boundaries
                 if (gridX >= 0 && gridX < gridWidth && gridY >= 0 && gridY < gridHeight) {
-                    // set the corresponding grid cell to 1
+                    // set the corresponding grid cell to the particle type
                     grid[gridY][gridX] = particleType;
 
-                    // if multileParticles mode is on, place additional particle blocks around the cursor
+                    // if multipleParticles mode is on, place additional particle blocks around the cursor
                     if (multipleParticles) {
                         vector<pair<int, int>> offsets = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
                         for (auto& offset : offsets) {
@@ -195,6 +194,7 @@ int main()
         // ImGui GUI
         ImGui::Begin("Controls");
         ImGui::Text("Left click to place a particle :)");
+        // For the future
 //        ImGui::RadioButton("Sand", &particleType, 1);
 //        ImGui::RadioButton("Water", &particleType, 2);
         ImGui::Separator();
@@ -225,7 +225,7 @@ int main()
         }
         ImGui::End();
 
-        // Wenn Zeit für neuen Frame erreicht ist -> neuen Frame zeichnen
+        // When Time for new frame is reached -> animate and draw new frame
         if (clock.getElapsedTime() >= timePerFrame)
         {
             animateNextFrame(grid, newGrid);

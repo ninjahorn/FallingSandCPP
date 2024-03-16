@@ -32,4 +32,5 @@ target_include_directories(imgui-sfml PUBLIC ${IMGUI_SFML_DIR})
 target_link_libraries(imgui-sfml imgui sfml-graphics sfml-window sfml-system)
 
 # Link ImGui and ImGui-SFML to your executable
+
 target_link_libraries(FallingSandSim imgui imgui-sfml)
