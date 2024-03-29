@@ -19,11 +19,7 @@ gap between the grid and the window.
 2. Build the project using the CMake file
 3. Run the following commands in the terminal:
 ```bash
-cd FallingSandSim
-mkdir build
-cd build
-cmake ..
-make
+coming soon
 ```
 4. Run the executable with `./FallingSandSim`
 
