@@ -1,6 +1,6 @@
 # Falling Sand Simulator
 
-This is a simple falling sand simulator written in C++ using the SFML library.
+This is a simple falling sand simulator written in C++ using the SFML library for the HWR course "CPP Programming".
 
 ## Basic description
 This simulator allows to simulate falling sand. You can left-click to place sand.
@@ -16,7 +16,7 @@ gap between the grid and the window.
 
 ## How to build
 1. Clone the repository
-2. Install the SFML library
+2. Build the project using the CMake file
 3. Run the following commands in the terminal:
 ```bash
 cd FallingSandSim
@@ -27,6 +27,10 @@ make
 ```
 4. Run the executable with `./FallingSandSim`
 
+## Inspirations
+https://www.youtube.com/watch?v=L4u7Zy_b868 - This youtube video by "The Coding Train"
+inspired me for this project. It was the first time i got into this concept of Cellular Automata.
+The author explains the concept and the way of working very clearly.
 
 ## Coming soon
 - More particles like water, walls, fire, smoke, etc.
@@ -38,3 +42,5 @@ classes, a grid class, a simulation class, etc.
 - Performance improvements
   - The current implementation is not the most efficient
   - The simulation should also work for much larger grids
+- Option to rezise the window
+  - The grid should rezise with the window
