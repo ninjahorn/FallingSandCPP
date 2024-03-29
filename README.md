@@ -38,5 +38,5 @@ classes, a grid class, a simulation class, etc.
 - Performance improvements
   - The current implementation is not the most efficient
   - The simulation should also work for much larger grids
-- Option to rezise the window
-  - The grid should rezise with the window
+- Option to resize the window
+  - The grid should resize with the window
